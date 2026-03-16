@@ -1,6 +1,6 @@
 #!/bin/sh
 exec 2>&1
-_user=_sing-box
+_user=_sing_box
 ! [ -d /var/lib/sing-box ] && install -m 700 -g $_user -o $_user -d /var/lib/sing-box
 ! [ -d /run/sing-box ] && install -m 700 -g $_user -o $_user -d /run/sing-box
 chown -R $_user:$_user /run/sing-box
