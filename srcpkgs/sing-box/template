@@ -1,6 +1,6 @@
 # Template file for 'sing-box'
 pkgname=sing-box
-version=1.13.0
+version=1.13.3
 revision=1
 build_style=go
 go_import_path=github.com/sagernet/sing-box
@@ -8,15 +8,16 @@ go_package=github.com/sagernet/sing-box/cmd/sing-box
 go_build_tags=with_gvisor,with_quic,with_dhcp,with_wireguard,with_utls,with_acme,with_clash_api,with_tailscale
 go_ldflags="-X github.com/sagernet/sing-box/constant.Version=${version}"
 short_desc="Universal proxy platform"
-maintainer="unixd <unixd@noreply.codeberg.org>"
+maintainer="Nizarjh <chel773@tutamail.com>"
 license="GPL-3.0-or-later"
 homepage="https://sing-box.sagernet.org/"
 distfiles="https://github.com/SagerNet/sing-box/archive/refs/tags/v${version}.tar.gz"
-checksum="6ddc71596dc937873c5aba15a4f2b395c5434265efdc1bd21f4c03d8c5b7f641"
+checksum=bf8933cd43e2797afcffb47528282e1c1aee078bf5eeda888d80a151fef726e1
+system_accounts="_sing_box"
 conf_files="/etc/sing-box/config.json"
+make_dirs="/var/lib/sing-box 700 _sing_box _sing_box"
 
 post_install() {
-	vmkdir etc/$pkgname
-	vcopy release/config/*.json etc/$pkgname/
-	vsv $pkgname
+	vinstall release/config/config.json 644 etc/sing-box
+	vsv sing-box
 }
