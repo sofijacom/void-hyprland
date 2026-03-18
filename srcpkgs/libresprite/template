@@ -1,12 +1,14 @@
 # Template file for 'libresprite'
 pkgname=libresprite
 version=1.2
-revision=2
-archs="x86_64*"
+revision=1
 build_style=cmake
-configure_args="-DCMAKE_INSTALL_PREFIX=/usr/ -G Ninja -DCMAKE_EXE_LINKER_FLAGS='-lwebp'"
-hostmakedepends="pkgconf cmake ninja"
-makedepends="libwebp-devel libcurl-devel freetype-devel giflib-devel gtest-devel libjpeg-turbo-devel pixman-devel libpng-devel SDL2-devel SDL2_image-devel tinyxml2-devel nodejs-devel zlib-devel libarchive-devel"
+build_helper=qemu
+configure_args="-DCMAKE_EXE_LINKER_FLAGS='-lwebp'"
+hostmakedepends="pkg-config"
+makedepends="freetype-devel tinyxml2-devel giflib-devel libwebp-devel
+ SDL2-devel libjpeg-turbo-devel SDL2_image-devel libpng-devel libXi-devel
+ pixman-devel libarchive-devel libcurl-devel"
 short_desc="Animated sprite editor & pixel art tool"
 maintainer="Kirilla39 <kirill39.pesin@ya.ru>"
 license="GPL-2.0-only"
