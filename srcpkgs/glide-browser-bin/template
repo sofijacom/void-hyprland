@@ -1,0 +1,51 @@
+# Template file for 'glide-browser-bin'
+pkgname=glide-browser-bin
+version=0.1.60a
+revision=1
+archs="x86_64,aarch64"
+depends="hunspell hyphen xdg-utils libavcodec libnotify nss"
+short_desc="Extensible and keyboard-focused web browser built on Firefox"
+maintainer="Vitali Kaplich <vitalik.kaplich@yandex.by>"
+license="MPL-2.0"
+homepage="https://glide-browser.app/"
+
+case "${XBPS_TARGET_MACHINE}" in
+x86_64*)
+	_upstream_arch=x86_64
+	_checksum=dffaaf153511972f724d4cef19a6897c8186af7ac4e1828da0fc187bcae0d6c2
+	;;
+aarch64*)
+	_upstream_arch=aarch64
+	_checksum=3a08ca0a1a9eb8e6d58048ab58a1604fa36a697973cba278a4f92dea157e75a6
+	;;
+*)
+	broken="No distfiles available for this target"
+	;;
+esac
+
+distfiles="https://github.com/glide-browser/glide/releases/download/${version}/glide.linux-${_upstream_arch}.tar.xz"
+checksum="${_checksum}"
+
+do_install() {
+	vmkdir opt/${pkgname}
+	vmkdir usr/bin
+	vmkdir usr/share/applications
+	vmkdir usr/share/pixmaps
+
+	vinstall "${FILESDIR}/glide-browser.desktop" 0644 usr/share/applications/
+
+	vcopy * "opt/${pkgname}"
+
+	ln -sf "/opt/${pkgname}/glide" "${DESTDIR}/usr/bin/glide-browser"
+
+	for size in 16 32 48 64 128; do
+		install -d ${DESTDIR}/usr/share/icons/hicolor/${size}x${size}/apps
+		vinstall browser/chrome/icons/default/default${size}.png 0644 usr/share/icons/hicolor/${size}x${size}/apps glide-browser.png
+	done
+
+	vinstall browser/chrome/icons/default/default48.png 0644 usr/share/pixmaps glide-browser.png
+
+	ln -Ts /usr/share/hunspell "${DESTDIR}/opt/${pkgname}/dictionaries"
+	ln -Ts /usr/share/hyphen "${DESTDIR}/opt/${pkgname}/hyphenation"
+	ln -sf /usr/lib/libnssckbi.so "${DESTDIR}/opt/${pkgname}/libnssckbi.so"
+}
