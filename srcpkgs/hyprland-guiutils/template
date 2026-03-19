@@ -3,9 +3,7 @@ pkgname=hyprland-guiutils
 version=0.2.1
 revision=1
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DCMAKE_INSTALL_PREFIX:PATH=/usr"
-hostmakedepends="cmake ninja pkgconf"
+hostmakedepends="ninja pkgconf"
 makedepends="aquamarine cairo-devel hyprgraphics hyprlang
  hyprtoolkit hyprutils libdrm-devel pixman-devel libxkbcommon-devel"
 depends="hyprland-qt-support"

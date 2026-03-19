@@ -3,8 +3,7 @@ pkgname=hypridle
 version=0.1.7
 revision=4
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DNO_SYSTEMD:BOOL=true"
+configure_args="-DNO_SYSTEMD:BOOL=true"
 hostmakedepends="cmake hyprwayland-scanner pkgconf"
 makedepends="elogind-devel hyprlang hyprland-protocols sdbus-cpp wayland-devel 
  wayland-protocols"

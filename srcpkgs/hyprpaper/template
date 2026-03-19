@@ -3,8 +3,7 @@ pkgname=hyprpaper
 version=0.8.3
 revision=1
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr"
-hostmakedepends="cmake pkgconf hyprwayland-scanner hyprwire hyprland-protocols wayland-protocols"
+hostmakedepends="pkgconf hyprwayland-scanner hyprwire hyprland-protocols wayland-protocols"
 makedepends="cairo-devel file-devel libjpeg-turbo-devel libwebp-devel
  hyprgraphics hyprutils hyprlang hyprtoolkit hyprwire pango-devel wlroots-devel"
 short_desc="Fast wallpaper utility for wlroots compositors with IPC controls"

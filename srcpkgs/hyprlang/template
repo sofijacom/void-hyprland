@@ -3,9 +3,7 @@ pkgname=hyprlang
 version=0.6.8
 revision=3
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DCMAKE_INSTALL_PREFIX:PATH=/usr"
-hostmakedepends="cmake pkgconf"
+hostmakedepends="pkgconf"
 makedepends="hyprutils"
 short_desc="Official implementation library for the hypr config language"
 maintainer="Nizarjh <chel773@tutamail.com>"

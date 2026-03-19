@@ -3,8 +3,7 @@ pkgname=hyprland
 version=0.54.2
 revision=1
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DCMAKE_INSTALL_PREFIX:PATH=/usr -DNO_SYSTEMD:BOOL=true"
+configure_args="-DNO_SYSTEMD:BOOL=true"
 hostmakedepends="cmake cpio glslang hyprwayland-scanner hyprwire jq pkgconf python3 xxd git"
 makedepends="aquamarine cairo-devel glaze hwids hyprcursor
  hyprgraphics hyprlang hyprutils hyprwire libdisplay-info-devel libdrm-devel

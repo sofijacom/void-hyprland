@@ -3,9 +3,8 @@ pkgname=hyprcursor
 version=0.1.13
 revision=1
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DCMAKE_INSTALL_PREFIX:PATH=/usr"
-hostmakedepends="cmake pkgconf"
+configure_args="-DCMAKE_BUILD_TYPE:STRING=Release"
+hostmakedepends="pkgconf"
 makedepends="cairo-devel hyprlang librsvg-devel libzip-devel tomlplusplus-devel"
 short_desc="Hyprland cursor format, library and utilities"
 maintainer="Nizarjh <chel773@tutamail.com>"

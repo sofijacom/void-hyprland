@@ -3,9 +3,7 @@ pkgname=hyprsunset
 version=0.3.3
 revision=2
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DCMAKE_INSTALL_PREFIX:PATH=/usr"
-hostmakedepends="cmake hyprwayland-scanner pkgconf"
+hostmakedepends="hyprwayland-scanner pkgconf"
 makedepends="hyprland-protocols hyprlang hyprutils
  hyprwayland-scanner wayland-devel wayland-protocols"
 short_desc="Application to enable a blue-light filter on Hyprland"

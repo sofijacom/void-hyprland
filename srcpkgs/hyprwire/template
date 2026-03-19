@@ -3,9 +3,8 @@ pkgname=hyprwire
 version=0.3.0
 revision=1
 build_style=cmake
-configure_args="--no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DCMAKE_INSTALL_PREFIX:PATH=/usr -DBUILD_TESTING:BOOL=OFF"
-hostmakedepends="cmake pkgconf pugixml-devel"
+configure_args="-DBUILD_TESTING:BOOL=OFF"
+hostmakedepends="pkgconf pugixml-devel"
 makedepends="hyprutils libffi-devel pugixml-devel"
 short_desc="A fast and consistent wire protocol for IPC"
 maintainer="Nizarjh <chel773@tutamail.com>"

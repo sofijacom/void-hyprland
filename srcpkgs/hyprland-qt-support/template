@@ -3,9 +3,8 @@ pkgname=hyprland-qt-support
 version=0.1.0
 revision=2
 build_style=cmake
-configure_args=" --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release \
- -DCMAKE_INSTALL_PREFIX:PATH=/usr -DINSTALL_QML_PREFIX=/lib/qt6/qml"
-hostmakedepends="cmake pkgconf qt6-base qt6-declarative-devel"
+configure_args="-DINSTALL_QML_PREFIX=/lib/qt6/qml"
+hostmakedepends="pkgconf qt6-base qt6-declarative-devel"
 makedepends="hyprlang qt6-base-devel qt6-declarative-devel"
 short_desc="QML style provider for Hypr* QT apps"
 maintainer="Nizarjh <chel773@tutamail.com>"
