@@ -1,2 +1,3 @@
 
-eilmeldung
+hyprwayland-scanner
+hyprlang
