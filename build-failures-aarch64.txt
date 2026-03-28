@@ -1,2 +1,2 @@
 
-eilmeldung
+hyprlauncher
