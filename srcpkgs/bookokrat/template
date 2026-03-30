@@ -1,0 +1,17 @@
+# Template file for 'bookokrat'
+pkgname=bookokrat
+version=0.3.8
+revision=1
+build_style=cargo
+hostmakedepends="pkg-config clang"
+makedepends="fontconfig-devel"
+short_desc="Terminal EPUB/PDF/DJVU reader focused on speed and Vim-style workflows"
+maintainer="Vitali Kaplich <vitalik.kaplich@yandex.by>"
+license="AGPL-3.0-or-later"
+homepage="https://github.com/bugzmanov/bookokrat"
+distfiles="https://github.com/bugzmanov/bookokrat/archive/v${version}.tar.gz"
+checksum="9257c00ec69866c017264ae6ab3903c08a72372162a24ea5ccbb0b0bfbe68754"
+
+post_install() {
+	vlicense LICENSE
+}
