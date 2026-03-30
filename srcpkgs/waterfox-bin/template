@@ -1,0 +1,32 @@
+# Template file for 'waterfox-bin'
+pkgname=waterfox-bin
+version=6.6.10
+revision=1
+archs="x86_64"
+depends="alsa-lib dbus-glib gtk+3 libXt libnotify nss"
+short_desc="Waterfox web browser"
+maintainer="Vitali Kaplich <vitalik.kaplich@yandex.by>"
+license="MPL-2.0"
+homepage="https://www.waterfox.net/"
+changelog="https://www.waterfox.com/releases/${version}/"
+distfiles="https://cdn1.waterfox.net/waterfox/releases/${version}/Linux_x86_64/waterfox-${version}.tar.bz2"
+checksum=8fe17790242cf9fe8f20e5229be8a8fce587f52a28b8655a153c91fe3d6cfeea
+
+do_install() {
+	vmkdir opt/${pkgname}
+	vmkdir usr/bin
+	vmkdir usr/share/applications
+	vmkdir usr/share/pixmaps
+
+	vcopy * "opt/${pkgname}"
+	vinstall "${FILESDIR}/waterfox.desktop" 644 usr/share/applications/
+
+	ln -sf "/opt/${pkgname}/waterfox" "${DESTDIR}/usr/bin/waterfox"
+
+	vinstall browser/chrome/icons/default/default48.png 644 usr/share/pixmaps waterfox.png
+
+	for size in 16 32 48 64 128; do
+		install -d ${DESTDIR}/usr/share/icons/hicolor/${size}x${size}/apps
+		vinstall browser/chrome/icons/default/default${size}.png 0644 usr/share/icons/hicolor/${size}x${size}/apps waterfox.png
+	done
+}
