@@ -1,0 +1,54 @@
+# Template file for 'librewolf-bin'
+pkgname=librewolf-bin
+version=149.0
+revision=1
+archs="x86_64 aarch64"
+depends="hunspell hyphen xdg-utils libavcodec libnotify nss"
+short_desc="LibreWolf web browser"
+maintainer="Vitali Kaplich <vitalik.kaplich@yandex.by>"
+license="MPL-2.0"
+homepage="https://librewolf.net/"
+changelog="https://codeberg.org/librewolf/bsys6/releases"
+
+case "${XBPS_TARGET_MACHINE}" in
+x86_64)
+	_upstream_arch=x86_64
+	_checksum=a56d74bc335930598dc78df223776c48ed05350152d7a35506ed97f4d01af94a
+	;;
+aarch64)
+	_upstream_arch=arm64
+	_checksum=da63a5797db929c346f3eda34a05c8dab4c3bd9ea357081560ea2820e1eaa891
+	;;
+*)
+	broken="No distfiles available for ${XBPS_TARGET_MACHINE}"
+	;;
+esac
+
+_rev=1
+_tag="${version}-${_rev}"
+
+distfiles="https://codeberg.org/api/packages/librewolf/generic/librewolf/${_tag}/librewolf-${_tag}-linux-${_upstream_arch}-package.tar.xz"
+checksum="${_checksum}"
+
+do_install() {
+	vmkdir opt/${pkgname}
+	vmkdir usr/bin
+	vmkdir usr/share/applications
+	vmkdir usr/share/pixmaps
+
+	vcopy * "opt/${pkgname}"
+	vinstall "${FILESDIR}/librewolf.desktop" 644 usr/share/applications/
+
+	ln -sf "/opt/${pkgname}/librewolf" "${DESTDIR}/usr/bin/librewolf"
+
+	vinstall browser/chrome/icons/default/default48.png 644 usr/share/pixmaps librewolf.png
+
+	for size in 16 32 48 64 128; do
+		install -d ${DESTDIR}/usr/share/icons/hicolor/${size}x${size}/apps
+		vinstall browser/chrome/icons/default/default${size}.png 0644 usr/share/icons/hicolor/${size}x${size}/apps librewolf.png
+	done
+
+	ln -Ts /usr/share/hunspell "${DESTDIR}/opt/${pkgname}/dictionaries"
+	ln -Ts /usr/share/hyphen "${DESTDIR}/opt/${pkgname}/hyphenation"
+	ln -sf /usr/lib/libnssckbi.so "${DESTDIR}/opt/${pkgname}/libnssckbi.so"
+}
