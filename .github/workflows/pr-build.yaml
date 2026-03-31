@@ -41,15 +41,15 @@ jobs:
               run: |
                   git clone --single-branch --branch main "https://github.com/${{ github.repository }}.git" extra
                   cd extra
-                  git fetch --no-tags origin "${{ github.event.pull_request.head.sha }}" --depth=1
+                  git fetch --no-tags origin "${{ github.event.pull_request.head.sha }}"
                   git checkout --detach "${{ github.event.pull_request.head.sha }}"
 
             - name: Determine changed templates
               id: changed
               run: |
                   cd extra
-                  base="${{ github.event.pull_request.base.sha }}"
                   tip="${{ github.event.pull_request.head.sha }}"
+                  base="$(git merge-base origin/main "$tip")"
 
                   changed_pkgs=$(git diff-tree -r --no-renames --name-only --diff-filter=AM "$base" "$tip" -- 'srcpkgs/*/template' \
                       | cut -d/ -f2 \
