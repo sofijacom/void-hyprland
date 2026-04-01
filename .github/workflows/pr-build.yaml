@@ -39,24 +39,23 @@ jobs:
 
             - name: Checkout repo (PR head)
               run: |
-                  git clone --depth 1 "https://github.com/${{ github.repository }}.git" extra
+                  git clone --single-branch --branch main "https://github.com/${{ github.repository }}.git" extra
                   cd extra
-                  git fetch --no-tags origin "${{ github.event.pull_request.head.sha }}" --depth 1
+                  git fetch --no-tags origin "${{ github.event.pull_request.head.sha }}"
                   git checkout --detach "${{ github.event.pull_request.head.sha }}"
 
             - name: Determine changed templates
               id: changed
               run: |
                   cd extra
-                  base="${{ github.event.pull_request.base.sha }}"
                   tip="${{ github.event.pull_request.head.sha }}"
+                  base="$(git merge-base origin/main "$tip")"
 
-                  changed_pkgs=$(git diff --name-only "$base" "$tip" -- 'srcpkgs/*/template' \
+                  changed_pkgs=$(git diff-tree -r --no-renames --name-only --diff-filter=AM "$base" "$tip" -- 'srcpkgs/*/template' \
                       | cut -d/ -f2 \
                       | sort -u \
                       | tr '\n' ' ')
-                  removed_pkgs=$(git diff --name-status "$base" "$tip" -- 'srcpkgs/*/template' \
-                      | awk '$1=="D"{print $2}' \
+                  removed_pkgs=$(git diff-tree -r --no-renames --name-only --diff-filter=D "$base" "$tip" -- 'srcpkgs/*/template' \
                       | cut -d/ -f2 \
                       | sort -u \
                       | tr '\n' ' ')
@@ -72,7 +71,7 @@ jobs:
 
             - name: Checkout void-packages
               run: |
-                  git clone --depth 1 https://github.com/void-linux/void-packages.git void-packages
+                  git clone --depth=1 https://github.com/void-linux/void-packages.git void-packages
                   cd void-packages
                   git checkout --detach master
 
