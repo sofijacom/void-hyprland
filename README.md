@@ -16,14 +16,19 @@ This repository provides:
 
 ## Branches
 
+> [!IMPORTANT]
+> The `manual` branch includes a **larger set of packages** compared to `main`.
+>  
+> Some packages are only available there due to size or build constraints.
+> If something is missing in `main`, you will likely find it in `manual`.
 This repository is split into branches with different guarantees:
 
-### **main**
+### **[main](https://github.com/Event-Horizon-VL/blackhole-vl/tree/main)**
 - Stable and tested templates
 - Prebuilt binary packages are provided
 - Recommended for end users
 
-### **manual**
+### **[manual](https://github.com/Event-Horizon-VL/blackhole-vl/tree/manual)**
 - Templates are expected to build successfully
 - **No prebuilt binaries are provided**
 - Intended for local/manual builds only  
