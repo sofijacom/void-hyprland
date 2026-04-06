@@ -1,0 +1,20 @@
+# Template file for 'vinyl-player'
+pkgname=vinyl-player
+version=1.2.2
+revision=1
+build_style=cargo
+hostmakedepends="pkg-config"
+makedepends="gtk4-devel libadwaita-devel gstreamer1-devel"
+#depends=""
+short_desc="Simple adwaita music player, developed on relm4 and gst-rs"
+maintainer="Nizarjh <chel773@tutamail.com>"
+license="GPL-3.0-or-later"
+homepage="https://codeberg.org/M23Snezhok/Vinyl"
+changelog="https://codeberg.org/M23Snezhok/Vinyl/releases"
+distfiles="https://codeberg.org/M23Snezhok/Vinyl/archive/v${version}.tar.gz"
+checksum=faab975cec5530f14675260d852a38031816cdf9e417e0f614d107c8dbc8d3d2
+
+post_install() {
+	vinstall ${FILESDIR}/vinyl-player.desktop 644 usr/share/applications
+	vbin     "${FILESDIR}/vinyl-player.sh"
+}
